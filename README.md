@@ -201,10 +201,12 @@ Below are some sample images from Track 2
 ![images](D:\udacity\CarND-Behavioral-Cloning-P3\report_images\center_2017_07_26_22_56_20_694.jpg)
 ![images](D:\udacity\CarND-Behavioral-Cloning-P3\report_images\center_2017_07_26_22_56_28_446.jpg)
 
+As you can see the track is very different, with a centre line, different road edges, and a very different roadside environment.
+
 
 I visualised the dataset as a histogram again
 
-![images](D:\udacity\CarND-Behavioral-Cloning-P3\report_images\both_left_right_added.png)
+![images](https://github.com/Geordio/Behavioral-Cloning-P3/tree/master/report_images/report_images\both_left_right_added.png)
 
 However, still the dataset has a bias to straight ahead steering, but with additional peaks due to the side cameras.
 
