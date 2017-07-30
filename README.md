@@ -206,7 +206,7 @@ As you can see the track is very different, with a centre line, different road e
 
 I visualised the dataset as a histogram again
 
-![images](https://raw.githubusercontent.com/Geordio/Behavioral-Cloning-P3/tree/master/report_images/both_left_right_added.png)
+![images]https://raw.githubusercontent.com/Geordio/Behavioral-Cloning-P3/tree/master/report_images/both_left_right_added.png
 
 However, still the dataset has a bias to straight ahead steering, but with additional peaks due to the side cameras.
 
