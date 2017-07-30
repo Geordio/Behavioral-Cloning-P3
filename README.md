@@ -222,6 +222,9 @@ The dataplot below shows the distribution of the final dataset. Even after disca
 As you can see the distribution is much more even.
 
 I trained the model over 15 epochs, with the default learning rate using the Adam optimiser.
+after  15 epochs
+Training loss: 0.0255
+val_loss: 0.0215
 
 ### Simulation Video
 A video of the simulation is included in the repository.
