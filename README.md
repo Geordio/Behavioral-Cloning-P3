@@ -149,7 +149,7 @@ model.add(Dense(1))
 
 
 Below is the archiecture as shown in the Nvidia end to end learning papaer.
-![dataset](D:\udacity\CarND-Behavioral-Cloning-P3\report_images\nvidia_arch.png)
+![dataset](https://github.com/Geordio/Behavioral-Cloning-P3/blob/master/report_images/nvidia_arch.png)
 
 
 
@@ -161,7 +161,7 @@ The performance was pretty good as a starting effort, but the car performance wa
 
 I decided to visualise the dataset at this stage.
 
-![dataset](D:\udacity\CarND-Behavioral-Cloning-P3\report_images\initial_dataset.png)
+![dataset](https://github.com/Geordio/Behavioral-Cloning-P3/blob/master/report_images/initial_dataset.png)
 
 As can be seen, the vast majority of the images are in the straight ahead position. There are very few inputs greater than 0.5 (12.5 degrees) in either direction, which explains the tendency to understeer.
 Note:
@@ -171,10 +171,10 @@ full right turn is logged as +1 but displayed as +25
 Below are some sample images
 
 
-![images](D:\udacity\CarND-Behavioral-Cloning-P3\report_images\center_2017_07_15_15_12_55_604.jpg)
-![images](D:\udacity\CarND-Behavioral-Cloning-P3\report_images\center_2017_07_15_15_13_04_035.jpg)
-![images](D:\udacity\CarND-Behavioral-Cloning-P3\report_images\center_2017_07_15_15_24_51_894.jpg)
-![images](D:\udacity\CarND-Behavioral-Cloning-P3\report_images\shadow.jpg)
+![images](https://github.com/Geordio/Behavioral-Cloning-P3/blob/master/report_images/center_2017_07_15_15_12_55_604.jpg)
+![images](https://github.com/Geordio/Behavioral-Cloning-P3/blob/master/report_images/center_2017_07_15_15_13_04_035.jpg)
+![images](https://github.com/Geordio/Behavioral-Cloning-P3/blob/master/report_images/center_2017_07_15_15_24_51_894.jpg)
+![images](https://github.com/Geordio/Behavioral-Cloning-P3/blob/master/report_images/shadow.jpg)
 
 Note that although the images appear fairly consistent, the final image above shows a shadow from a tree that could cause issues if there were many occurances, and the texture and road edges of the bridge are unique.
 
@@ -191,15 +191,15 @@ In order to expand the dataset, I took the following sets:
 
 Below are the left centre and right images of a given sample (Track 1)
 
-![images](D:\udacity\CarND-Behavioral-Cloning-P3\report_images\left_2017_07_15_15_24_51_894.jpg)
-![images](D:\udacity\CarND-Behavioral-Cloning-P3\report_images\center_2017_07_15_15_24_51_894.jpg)
-![images](D:\udacity\CarND-Behavioral-Cloning-P3\report_images\right_2017_07_15_15_24_51_894.jpg)
+![images](https://github.com/Geordio/Behavioral-Cloning-P3/blob/master/report_images/left_2017_07_15_15_24_51_894.jpg)
+![images](https://github.com/Geordio/Behavioral-Cloning-P3/blob/master/report_images/center_2017_07_15_15_24_51_894.jpg)
+![images](https://github.com/Geordio/Behavioral-Cloning-P3/blob/master/report_images/right_2017_07_15_15_24_51_894.jpg)
 
 Below are some sample images from Track 2
 
-![images](D:\udacity\CarND-Behavioral-Cloning-P3\report_images\center_2017_07_26_22_55_38_215.jpg)
-![images](D:\udacity\CarND-Behavioral-Cloning-P3\report_images\center_2017_07_26_22_56_20_694.jpg)
-![images](D:\udacity\CarND-Behavioral-Cloning-P3\report_images\center_2017_07_26_22_56_28_446.jpg)
+![images](https://github.com/Geordio/Behavioral-Cloning-P3/blob/master/report_images/center_2017_07_26_22_55_38_215.jpg)
+![images](https://github.com/Geordio/Behavioral-Cloning-P3/blob/master/report_images/center_2017_07_26_22_56_20_694.jpg)
+![images](https://github.com/Geordio/Behavioral-Cloning-P3/blob/master/report_images/center_2017_07_26_22_56_28_446.jpg)
 
 As you can see the track is very different, with a centre line, different road edges, and a very different roadside environment.
 
@@ -209,9 +209,6 @@ I visualised the dataset as a histogram again
 ![images](https://github.com/Geordio/Behavioral-Cloning-P3/blob/master/report_images/both_left_right_added.png)
 
 However, still the dataset has a bias to straight ahead steering, but with additional peaks due to the side cameras.
-
-
-
 
 In order to balance the distribution I performed the following actions:
 
@@ -226,7 +223,7 @@ In order to balance the distribution I performed the following actions:
 
 The dataplot below shows the distribution of the final dataset. Even after discarding images I still have around 100,000 samples
 
-![images](D:\udacity\CarND-Behavioral-Cloning-P3\report_images\final.png)
+![images](https://github.com/Geordio/Behavioral-Cloning-P3/blob/master/report_images/final.png)
 
 As you can see the distribution is much more even.
 
