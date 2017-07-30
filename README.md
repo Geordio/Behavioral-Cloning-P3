@@ -228,5 +228,5 @@ val_loss: 0.0215
 
 ### Simulation Video
 A video of the simulation is included in the repository.
-![images](https://github.com/Geordio/Behavioral-Cloning-P3/blob/master/run.mp4)
+![Video](https://github.com/Geordio/Behavioral-Cloning-P3/blob/master/run.mp4)
 The car tends to oscilate around the track, which could be minised my tuning the PIController in drive.py
