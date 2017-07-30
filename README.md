@@ -1,4 +1,4 @@
-#**Behavioral Cloning** 
+# **Behavioral Cloning** 
 
 
 ---
@@ -178,16 +178,11 @@ Below are some sample images
 
 Note that although the images appear fairly consistent, the final image above shows a shadow from a tree that could cause issues if there were many occurances, and the texture and road edges of the bridge are unique.
 
-
-
-
-
 At this point, and looking back at my experience with the Traffic Sign Classifier Project, I decided that data was key.
 In order to expand the dataset, I took the following sets:
 1. Capture training data from track 2. I found track 2 to be incredibly difficult to drive, but completed around 6 laps.
 2. Performing some recovery actions by driving to the edge of the road and recording the action of steering back to the centre.
 3. Added the side cameras to the training data with a modified steering input. Originally I tried to work out through maths how much to modify the angle by, but found I was making too many assumptions about separation of cameras and angles of cameras to the horizontal etc, so in the end I used a trial and error method to arrive at 0.25 as a value that gave reasonable performance. In addition, I also did some selective data capture, both doing recovery driving, recording the recovery from a starting point need the edge of the track, and also driving selected sections of the track.
-
 
 Below are the left centre and right images of a given sample (Track 1)
 
@@ -202,7 +197,6 @@ Below are some sample images from Track 2
 ![images](https://github.com/Geordio/Behavioral-Cloning-P3/blob/master/report_images/center_2017_07_26_22_56_28_446.jpg)
 
 As you can see the track is very different, with a centre line, different road edges, and a very different roadside environment.
-
 
 I visualised the dataset as a histogram again
 
@@ -226,6 +220,8 @@ The dataplot below shows the distribution of the final dataset. Even after disca
 ![images](https://github.com/Geordio/Behavioral-Cloning-P3/blob/master/report_images/final.png)
 
 As you can see the distribution is much more even.
+
+I trained the model over 15 epochs, with the default learning rate using the Adam optimiser.
 
 ### Simulation Video
 A video of the simulation is included in the repository.
