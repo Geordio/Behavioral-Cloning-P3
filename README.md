@@ -24,7 +24,7 @@ The goals / steps of this project are the following:
 ---
 ###Files Submitted & Code Quality
 
-####1. Submission includes all required files and can be used to run the simulator in autonomous mode
+#### 1. Submission includes all required files and can be used to run the simulator in autonomous mode
 
 My project includes the following files:
 
@@ -35,7 +35,7 @@ My project includes the following files:
 * run.mp4 a sample video showing the autonomous driving of track 1
 * helpers.py methos to help with visualisation and investigations
 
-####2. Submission includes functional code
+#### 2. Submission includes functional code
 Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
 ```sh
 python drive.py model.h5
@@ -43,7 +43,7 @@ python drive.py model.h5
 The model should perform well on track 1
 
 
-####3. Submission code is usable and readable
+#### 3. Submission code is usable and readable
 
 The model.py file contains the code for training and saving the convolution neural network. The file includes a description of the pipeline I used for reading the dataset from the csv file, pre-processing images and training and validating the model.
 The drive.py file was modified to include image preprocessing of the images coming from the feed from the simulator. If I had included the preprocessing in my model using keras this would not have been necessary.
@@ -54,7 +54,7 @@ I used a generator for loading data to the model. The generator also peforms ran
 
 ###Model Architecture and Training Strategy
 
-####1. An appropriate model architecture has been employed
+#### 1. An appropriate model architecture has been employed
 
 I implemented the CNN architecture based on the Nvidia end to end learning paper: https://devblogs.nvidia.com/parallelforall/deep-learning-self-driving-cars/
 
@@ -71,7 +71,7 @@ It felt a little black box, something I wasnt happy with, and as I was having is
 The model includes RELU layers to introduce nonlinearity after each convolution.
 
 
-####2. Attempts to reduce overfitting in the model
+#### 2. Attempts to reduce overfitting in the model
 
 The model contains multiple dropout layers in order to prevent overfitting.
 Dropouts were included after the 5 convolutions.
@@ -81,11 +81,11 @@ I set the dropout probability to 0.2. ie 20% of the units will be dropped.
 In addition, I captured approximatly 6 laps of data from track 2 in order to prevent overfitting to track 1. Track 2 has a vastly different layout, and includes many hills, much tighter turns, and areas of shadow that will allow assist in preventing overfitting to track 1.
 
 
-####3. Model parameter tuning
+#### 3. Model parameter tuning
 
 I used the adam optimizer, so the learning rate was not tuned manually.
 
-####4. Appropriate training data
+#### 4. Appropriate training data
 
 I captured training data carefully as follows:
 - 3 laps in each direction of track 1
@@ -102,9 +102,9 @@ This gave me a lot of data that I would be able to tune to suit my needs as requ
 
 
 
-###Model Architecture and Training Strategy
+### Model Architecture and Training Strategy
 
-####1. Solution Design Approach
+#### 1. Solution Design Approach
 
 I initially captured a sample of training data to allow initial training after implementing a model. To do this drove 3 laps anticlockwise round track 1.
 
@@ -118,7 +118,7 @@ I cropped the images to remove features above the horizon and also the car hood.
 I wasn't a big fan of some of the Keras features, I didnt like that it was more difficult to view the preprocessing steps if they are done in Keras. Much prefer performing cropping and resizing in numpy or opencv and being able to visualise easily without building another model in order to do so. However, using Keras appeared to give a significant performance gain over open CV, which I assume is through performing tasks in parallel on the GPU.
 
 
-####2. Final Model Architecture
+#### 2. Final Model Architecture
 
 The final model architecture consisted of a convolution neural network with the following layers.
 
@@ -154,7 +154,7 @@ Below is the archiecture as shown in the Nvidia end to end learning papaer.
 
 
 
-####3. Creation of the Training Set & Training Process
+#### 3. Creation of the Training Set & Training Process
 
 After my initial capture of 3 laps of data, I trained it for 5 epochs (unfortunately I didnt note the loses at this point as I was keen to let it drive).
 The performance was pretty good as a starting effort, but the car performance was eratic, and would crash.
@@ -227,6 +227,6 @@ The dataplot below shows the distribution of the final dataset. Even after disca
 
 As you can see the distribution is much more even.
 
-###Simulation Video
+### Simulation Video
 A video of the simulation is included in the repository.
 The car tends to oscilate around the track, which could be minised my tuning the PIController in drive.py
