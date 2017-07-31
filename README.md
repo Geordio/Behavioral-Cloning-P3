@@ -80,6 +80,7 @@ I set the dropout probability to 0.2. ie 20% of the units will be dropped.
 
 In addition, I captured approximatly 6 laps of data from track 2 in order to prevent overfitting to track 1. Track 2 has a vastly different layout, and includes many hills, much tighter turns, and areas of shadow that will allow assist in preventing overfitting to track 1.
 
+After still encountering problems, I implemented L2 regularization with L2 set to 0.001
 
 #### 3. Model parameter tuning
 
@@ -129,23 +130,22 @@ The final model architecture consisted of a convolution neural network with the 
 
 Extracted from the model.py 
 
-model.add(Convolution2D(24,5,5,subsample= (2,2), activation = 'relu'))
-model.add(Dropout(drop_prob))
-model.add(Convolution2D(36,5,5,subsample= (2,2), activation = 'relu'))
-model.add(Dropout(drop_prob))
-model.add(Convolution2D(48,5,5,subsample= (2,2), activation = 'relu'))
-model.add(Dropout(drop_prob))
-model.add(Convolution2D(64,3,3,subsample= (1,1), activation = 'relu'))
-model.add(Dropout(drop_prob))
-model.add(Convolution2D(64,3,3,subsample= (1,1), activation = 'relu'))
-model.add(Dropout(drop_prob))
+model.add(Convolution2D(24,5,5,subsample= (2,2), input_shape=(66, 200, 3),activation = 'relu', W_regularizer=l2(0.001)))
+model.add(Dropout(0.2))
+model.add(Convolution2D(36,5,5,subsample= (2,2), activation = 'relu', W_regularizer=l2(0.001)))
+model.add(Dropout(0.2))
+model.add(Convolution2D(48,5,5,subsample= (2,2), activation = 'relu', W_regularizer=l2(0.001)))
+model.add(Dropout(0.2))
+model.add(Convolution2D(64,3,3,subsample= (1,1), activation = 'relu', W_regularizer=l2(0.001)))
+model.add(Dropout(0.2))
+model.add(Convolution2D(64,3,3,subsample= (1,1), activation = 'relu',W_regularizer=l2(0.001)))
+model.add(Dropout(0.2))
 model.add(Flatten())
-model.add(Dense(1164))
-model.add(Dense(100))
-model.add(Dense(50))
-model.add(Dropout(drop_prob))
-model.add(Dense(10))
-model.add(Dense(1))
+model.add(Dense(1164,W_regularizer=l2(0.001) ))
+model.add(Dense(100, W_regularizer=l2(0.001)))
+model.add(Dense(50, W_regularizer=l2(0.001)))
+model.add(Dense(10, W_regularizer=l2(0.001)))
+model.add(Dense(1, W_regularizer=l2(0.001)))
 
 
 Below is the archiecture as shown in the Nvidia end to end learning papaer.
@@ -221,10 +221,7 @@ The dataplot below shows the distribution of the final dataset. Even after disca
 
 As you can see the distribution is much more even.
 
-I trained the model over 15 epochs, with the default learning rate using the Adam optimiser.
-after  15 epochs
-Training loss: 0.0255
-val_loss: 0.0215
+I trained the model over 25 epochs, with the default learning rate using the Adam optimiser.
 
 ### Simulation Video
 A video of the simulation is included in the repository.
