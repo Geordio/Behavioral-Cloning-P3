@@ -6,6 +6,8 @@ import random
 import numpy as np
 
 from keras.layers import Flatten, Dense, Cropping2D, Convolution2D, BatchNormalization, Lambda, Activation, Dropout
+from keras.regularizers import l2 # L2-regularisation
+
 from keras.optimizers import Adam
 from keras.models import Sequential
 from sklearn.model_selection import train_test_split
@@ -35,7 +37,7 @@ straight_thres = 0.1
 # orginal image is 160 x 320. I modified to 70 x 320
 new_width = 200
 new_height = 66
-
+l2_lambda = 0.001
 
 
 def flip_left_right(image):
@@ -210,9 +212,7 @@ def generator_train_all(images_files, angles, batch_size):
 def generator_train_rnd(images_files, angles, batch_size):
     num_samples = len(images_files)
 
-
     while True:
-        # shuffle the dataset (which is in 2 arrays, central and non central
         angles, images_files = shuffle(angles, images_files)
         out_images = []
         out_angles = []
@@ -279,9 +279,7 @@ samples = samples+samples_new
 
 # organise the data into centre, left and right camera data
 centre_angles, centre_paths, left_angles, left_paths, right_angles, right_paths =organise_dataset(samples)
-# plot_angles(centre_angles)
-# plot_angles(left_angles)
-# plot_angles(right_angles)
+
 balanced_angles, balanced_images =  partition_data(centre_angles, centre_paths, left_angles, left_paths, right_angles, right_paths)
 #plot_angles( balanced_angles)
 
@@ -291,10 +289,13 @@ balanced_images, balanced_angles = shuffle(balanced_images, balanced_angles)
 images_train, images_valid, angles_train,  angles_valid = train_test_split(balanced_images, balanced_angles,test_size=0.2, random_state=48)
 
 print('images_train total {}'.format(len(angles_train)))
+setsize = len(angles_train)
 
+print('images_train cutdown {}'.format(len(balanced_images)))
+plot_angles( angles_train)
 # set up the generators
-train_generator = generator_train_all(images_train, angles_train, batch_size=128)
-validation_generator = generator_valid(images_valid,angles_valid, batch_size=128)
+train_generator = generator_train_rnd(images_train, angles_train, batch_size=100)
+validation_generator = generator_valid(images_valid,angles_valid, batch_size=100)
 
 ###model definition
 model = Sequential()
@@ -306,31 +307,29 @@ model = Sequential()
 
 
 # implement convnet as per the nvidia white paper on end to end learning
-model.add(Convolution2D(24,5,5,subsample= (2,2), input_shape=(66, 200, 3),activation = 'relu'))
+model.add(Convolution2D(24,5,5,subsample= (2,2), input_shape=(66, 200, 3),activation = 'relu', W_regularizer=l2(0.001)))
 model.add(Dropout(0.2))
-model.add(Convolution2D(36,5,5,subsample= (2,2), activation = 'relu'))
+model.add(Convolution2D(36,5,5,subsample= (2,2), activation = 'relu', W_regularizer=l2(0.001)))
 model.add(Dropout(0.2))
-model.add(Convolution2D(48,5,5,subsample= (2,2), activation = 'relu'))
+model.add(Convolution2D(48,5,5,subsample= (2,2), activation = 'relu', W_regularizer=l2(0.001)))
 model.add(Dropout(0.2))
-model.add(Convolution2D(64,3,3,subsample= (1,1), activation = 'relu'))
+model.add(Convolution2D(64,3,3,subsample= (1,1), activation = 'relu', W_regularizer=l2(0.001)))
 model.add(Dropout(0.2))
-model.add(Convolution2D(64,3,3,subsample= (1,1), activation = 'relu'))
+model.add(Convolution2D(64,3,3,subsample= (1,1), activation = 'relu',W_regularizer=l2(0.001)))
 model.add(Dropout(0.2))
 model.add(Flatten())
-model.add(Dense(1164))
-model.add(Dense(100))
-model.add(Dense(50))
-model.add(Dense(10))
-model.add(Dense(1))
+model.add(Dense(1164,W_regularizer=l2(0.001) ))
+model.add(Dense(100, W_regularizer=l2(0.001)))
+model.add(Dense(50, W_regularizer=l2(0.001)))
+model.add(Dense(10, W_regularizer=l2(0.001)))
+model.add(Dense(1, W_regularizer=l2(0.001)))
 
 # compile model. Use Adam Optimiser
 model.compile(loss = 'mse', optimizer=Adam())
 
 # run the fit generator
-samples_to_include = int(len(images_train)/2)
-
-model.fit_generator(train_generator, samples_per_epoch=samples_to_include,\
-                    validation_data=validation_generator, nb_val_samples=len(angles_valid), nb_epoch=5)
+model.fit_generator(train_generator, samples_per_epoch=setsize,\
+                    validation_data=validation_generator, nb_val_samples=len(angles_valid), nb_epoch=25)
 
 
 # print the model summary
