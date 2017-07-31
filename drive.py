@@ -64,11 +64,14 @@ def telemetry(sid, data):
         image = Image.open(BytesIO(base64.b64decode(imgString)))
         image_array = np.asarray(image)
 
-        # image_array = cv2.resize(image_array[66:-24, :],(200, 64))
+
         image_array = image_array[66:-24, :]
-        # print('shape: {}' .format(image_array.shape))
         image_array = (scipy.misc.imresize(image_array, [66, 200])) / 255
-        # print('shape2: {}' .format(image_array.shape))
+
+        # change from to RGB to BGR (model already trained in BGR)
+        image_array = image_array[:, :, ::-1]
+
+
 
         steering_angle = float(model.predict(image_array[None, :, :, :], batch_size=1))
 
